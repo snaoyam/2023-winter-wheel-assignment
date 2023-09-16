@@ -4,8 +4,8 @@ COPY . /app
 
 WORKDIR /app
 
-EXPOSE 5000
-ENV PORT 5000
+EXPOSE 5001
+ENV PORT 5001
 
 RUN npm ci
 ENTRYPOINT ["npm", "run", "serve"]

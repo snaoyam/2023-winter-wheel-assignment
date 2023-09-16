@@ -4,10 +4,11 @@ COPY . /app
 
 WORKDIR /app
 
-EXPOSE 80
-ENV PORT 80
+EXPOSE 3000
+ENV PORT 3000
 
 RUN npm ci
 RUN npm run build
 RUN npx react-inject-env set
-ENTRYPOINT ["npx", "serve", "-s", "build", "-l", "80"]
+ENTRYPOINT ["npx", "serve", "-s", "build", "-l", "3000"]
+# ENTRYPOINT ["sh", "-c", "npx react-inject-env set && npx serve -s build -l 3000"]
