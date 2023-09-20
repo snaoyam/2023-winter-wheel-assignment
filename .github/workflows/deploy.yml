@@ -21,8 +21,8 @@ jobs:
           echo "SERVER_DB_PATH=${{ secrets.SERVER_DB_PATH }}" >> .env.production
           echo "SERVER_FRONT_URL=${{ secrets.SERVER_FRONT_URL }}" >> .env.production
           echo "SERVER_SESSION_KEY=${{ secrets.SERVER_SESSION_KEY }}" >> .env.production
-          echo "SPARCSSSO_CLIENT_ID=${{ secrets.SPARCSSSO_CLIENT_ID }}" >> .env.production
-          echo "SPARCSSSO_CLIENT_KEY=${{ secrets.SPARCSSSO_CLIENT_KEY }}" >> .env.production
+          echo "SERVER_SPARCSSSO_CLIENT_ID=${{ secrets.SERVER_SPARCSSSO_CLIENT_ID }}" >> .env.production
+          echo "SERVER_SPARCSSSO_CLIENT_KEY=${{ secrets.SERVER_SPARCSSSO_CLIENT_KEY }}" >> .env.production
           echo "CLIENT_REACT_APP_BACK_URL=${{ secrets.CLIENT_REACT_APP_BACK_URL }}" >> .env.production
       - name: put env file to server
         uses: appleboy/scp-action@v0.1.4
