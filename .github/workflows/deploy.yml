@@ -44,5 +44,5 @@ jobs:
           script: |
             cd ${{ secrets.PROD_PATH }}
             git pull --rebase
-            sudo docker compose --file ./docker-compose.yml pull
+            sudo docker compose --file ./docker-compose.yml --env-file .env.production pull
             sudo docker compose --file ./docker-compose.yml --project-name taxi --env-file .env.production up --detach
