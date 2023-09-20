@@ -5,6 +5,10 @@ COPY . .
 EXPOSE 3000
 ENV PORT 3000
 
+#for debugging
+RUN pwd
+RUN ls -la
+
 RUN npm ci
 RUN npm run build
 RUN npx react-inject-env set
