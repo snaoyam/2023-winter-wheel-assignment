@@ -27,5 +27,6 @@ jobs:
           script_stop: true
           script: |
             cd ${{ secrets.PROD_PATH }}
-            docker compose --file ./docker-compose.yml pull
-            docker compose --file ./docker-compose.yml --project-name taxi up --detach
+            git pull --rebase
+            sudo docker compose --file ./docker-compose.yml pull
+            sudo docker compose --file ./docker-compose.yml --project-name taxi up --detach
