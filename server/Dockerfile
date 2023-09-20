@@ -1,6 +1,6 @@
 FROM node:16-alpine3.11
 WORKDIR /app
-COPY . .
+COPY ./server .
 
 EXPOSE 5001
 ENV PORT 5001

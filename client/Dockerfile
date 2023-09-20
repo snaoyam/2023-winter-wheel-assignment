@@ -1,13 +1,9 @@
 FROM node:16-alpine3.11
 WORKDIR /app
-COPY . .
+COPY ./client .
 
 EXPOSE 3000
 ENV PORT 3000
-
-#for debugging
-RUN pwd
-RUN ls -la
 
 RUN npm ci
 RUN npm run build
