@@ -10,8 +10,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-        with:
-          path: ./server
       - name: Login to GHCR
         uses: docker/login-action@v1
         with:
@@ -21,7 +19,7 @@ jobs:
       - name: Build Docker Image and Push
         uses: docker/build-push-action@v5
         with:
-          file: ./Dockerfile
+          file: ./server/Dockerfile
           push: true
           tags: |
             "ghcr.io/${{ github.actor }}/taxi-server:${{ github.ref_name }}"
