@@ -21,7 +21,7 @@ services:
     container_name: taxi-back
     depends_on:
       - database
-    image: ghcr.io/snaoyam/taxi-back:latest
+    image: ghcr.io/snaoyam/2023-winter-wheel-assignment/server:latest
     restart: always
     environment:
       - AWS_ACCESS_KEY_ID=${SERVER_AWS_ACCESS_KEY_ID}
@@ -35,7 +35,7 @@ services:
 
   client:
     container_name: taxi-front
-    image: ghcr.io/snaoyam/taxi-client:latest
+    image: ghcr.io/snaoyam/2023-winter-wheel-assignment/client:latest
     restart: always
     environment:
       - REACT_APP_BACK_URL=${CLIENT_REACT_APP_BACK_URL}

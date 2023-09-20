@@ -20,6 +20,7 @@ jobs:
           filters: |
             client:
               - 'client/**'
+              - '.github/workflows/build-image-client.yml'
       - if: steps.changes.outputs.client == 'true'
         id: early
         run: echo changed
@@ -43,6 +44,6 @@ jobs:
           file: ./client/Dockerfile
           push: true
           tags: |
-            "ghcr.io/${{ github.repository_owner }}/taxi-client:${{ github.ref_name }}"
-            "ghcr.io/${{ github.repository_owner }}/taxi-client:latest"
+            "ghcr.io/${{ github.repository }}/client:${{ github.ref_name }}"
+            "ghcr.io/${{ github.repository }}/client:latest"
           labels: org.opencontainers.image.source=https://github.com/${{ github.repository }}

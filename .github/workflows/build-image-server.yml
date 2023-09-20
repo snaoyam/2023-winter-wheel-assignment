@@ -20,6 +20,7 @@ jobs:
           filters: |
             server:
               - 'server/**'
+              - '.github/workflows/build-image-server.yml'
       - if: steps.changes.outputs.server == 'true'
         id: early
         run: echo changed
@@ -43,6 +44,6 @@ jobs:
           file: ./server/Dockerfile
           push: true
           tags: |
-            "ghcr.io/${{ github.repository_owner }}/taxi-server:${{ github.ref_name }}"
-            "ghcr.io/${{ github.repository_owner }}/taxi-server:latest"
+            "ghcr.io/${{ github.repository }}/server:${{ github.ref_name }}"
+            "ghcr.io/${{ github.repository }}/server:latest"
           labels: org.opencontainers.image.source=https://github.com/${{ github.repository }}
