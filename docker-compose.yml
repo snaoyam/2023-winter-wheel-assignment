@@ -24,13 +24,13 @@ services:
     image: ghcr.io/snaoyam/taxi-back:latest
     restart: always
     environment:
-      - AWS_ACCESS_KEY_ID=${ SERVER_AWS_ACCESS_KEY_ID }
-      - AWS_SECRET_ACCESS_KEY=${ SERVER_AWS_SECRET_ACCESS_KEY }
-      - DB_PATH=${ SERVER_DB_PATH }
-      - FRONT_URL=${ SERVER_FRONT_URL }
-      - SESSION_KEY=${ SERVER_SESSION_KEY }
-      - SPARCSSSO_CLIENT_ID=${ SERVER_SPARCSSSO_CLIENT_ID }
-      - SPARCSSSO_CLIENT_KEY=${ SERVER_SPARCSSSO_CLIENT_KEY }
+      - AWS_ACCESS_KEY_ID=${SERVER_AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${SERVER_AWS_SECRET_ACCESS_KEY}
+      - DB_PATH=${SERVER_DB_PATH}
+      - FRONT_URL=${SERVER_FRONT_URL}
+      - SESSION_KEY=${SERVER_SESSION_KEY}
+      - SPARCSSSO_CLIENT_ID=${SERVER_SPARCSSSO_CLIENT_ID}
+      - SPARCSSSO_CLIENT_KEY=${SERVER_SPARCSSSO_CLIENT_KEY}
     #port=5001
 
   client:
@@ -38,7 +38,7 @@ services:
     image: ghcr.io/snaoyam/taxi-client:latest
     restart: always
     environment:
-      - REACT_APP_BACK_URL=${ CLIENT_REACT_APP_BACK_URL }
+      - REACT_APP_BACK_URL=${CLIENT_REACT_APP_BACK_URL}
     #port=3000
 
 volumes:
