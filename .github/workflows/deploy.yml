@@ -13,10 +13,26 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - uses: oNaiPs/secrets-to-env-action@v1
+      - name: make env file
+        run: |
+          touch .env.production
+          echo "SERVER_AWS_ACCESS_KEY_ID=${{ secrets.SERVER_AWS_ACCESS_KEY_ID }}" >> .env.production
+          echo "SERVER_AWS_SECRET_ACCESS_KEY=${{ secrets.SERVER_AWS_SECRET_ACCESS_KEY }}" >> .env.production
+          echo "SERVER_DB_PATH=${{ secrets.SERVER_DB_PATH }}" >> .env.production
+          echo "SERVER_FRONT_URL=${{ secrets.SERVER_FRONT_URL }}" >> .env.production
+          echo "SERVER_SESSION_KEY=${{ secrets.SERVER_SESSION_KEY }}" >> .env.production
+          echo "SPARCSSSO_CLIENT_ID=${{ secrets.SPARCSSSO_CLIENT_ID }}" >> .env.production
+          echo "SPARCSSSO_CLIENT_KEY=${{ secrets.SPARCSSSO_CLIENT_KEY }}" >> .env.production
+          echo "CLIENT_REACT_APP_BACK_URL=${{ secrets.CLIENT_REACT_APP_BACK_URL }}" >> .env.production
+      - name: put env file to server
+        uses: appleboy/scp-action@v0.1.4
         with:
-          secrets: ${{ toJSON(secrets) }}
-          include: SERVER_*, CLIENT_*
+          host: ${{ secrets.PROD_HOST }}
+          port: ${{ secrets.PROD_PORT }}
+          username: ${{ secrets.PROD_USERNAME }}
+          key: ${{ secrets.PROD_KEY }}
+          source: .env.production
+          target: ${{ secrets.PROD_PATH }}
       - name: pull image and restart the container
         uses: appleboy/ssh-action@v1.0.0
         with:
@@ -29,4 +45,4 @@ jobs:
             cd ${{ secrets.PROD_PATH }}
             git pull --rebase
             sudo docker compose --file ./docker-compose.yml pull
-            sudo docker compose --file ./docker-compose.yml --project-name taxi up --detach
+            sudo docker compose --file ./docker-compose.yml --project-name taxi --env-file .env.production up --detach
