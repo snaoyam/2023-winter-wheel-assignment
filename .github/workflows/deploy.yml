@@ -16,9 +16,7 @@ jobs:
       - uses: oNaiPs/secrets-to-env-action@v1
         with:
           secrets: ${{ toJSON(secrets) }}
-          include:
-            - SERVER_*
-            - CLIENT_*
+          include: SERVER_*, CLIENT_*
       - name: pull image and restart the container
         uses: appleboy/ssh-action@v1.0.0
         with:
@@ -28,6 +26,6 @@ jobs:
           key: ${{ secrets.PROD_KEY }}
           script_stop: true
           script: |
-            cd $${{ secrets.PROD_PATH }}
+            cd ${{ secrets.PROD_PATH }}
             docker compose --file ./docker-compose.yml pull
             docker compose --file ./docker-compose.yml --project-name taxi up --detach
