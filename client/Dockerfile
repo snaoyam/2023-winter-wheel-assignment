@@ -7,6 +7,4 @@ ENV PORT 3000
 
 RUN npm ci
 RUN npm run build
-RUN npx react-inject-env set
-ENTRYPOINT ["npx", "serve", "-s", "build", "-l", "3000"]
-# ENTRYPOINT ["sh", "-c", "npx react-inject-env set && npx serve -s build -l 3000"]
+ENTRYPOINT npx react-inject-env set && npx serve -s build -l 3000
