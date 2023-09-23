@@ -3,7 +3,7 @@ on:
   workflow_run:
     workflows:
       - build-image-client
-      # - build-image-server
+      - build-image-server
     types:
       - completed
 jobs:

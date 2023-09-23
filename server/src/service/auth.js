@@ -54,7 +54,7 @@ const joinus = (req, res, userData) => {
   });
   newUser.save((err) => {
     if (err) {
-      loginFail(req, res);
+      loginFail(req, res, security.frontUrl + "/login/fail#err0");
       return;
     }
     loginDone(req, res, userData);
@@ -72,7 +72,7 @@ const loginDone = (req, res, userData) => {
     { id: userData.id },
     "name id withdraw ban",
     (err, result) => {
-      if (err) loginFail(req, res);
+      if (err) loginFail(req, res, security.frontUrl + "/login/fail#err1");
       else if (!result) joinus(req, res, userData);
       else if (result.name != userData.name) update(req, res, userData);
       else {
@@ -103,7 +103,7 @@ const sparcsssoCallbackHandler = (req, res) => {
   const state1 = req.session.state;
   const state2 = req.body.state || req.query.state;
 
-  if (state1 !== state2) loginFail(req, res);
+  if (state1 !== state2) loginFail(req, res, security.frontUrl + "/login/fail#err2");
   else {
     const code = req.body.code || req.query.code;
     client.getUserInfo(code).then((userDataBefore) => {
@@ -117,9 +117,9 @@ const sparcsssoCallbackHandler = (req, res) => {
       } else {
         // 카이스트 구성원이 아닌 경우, SSO 로그아웃 이후, 로그인 실패 URI 로 이동합니다
         const { sid } = userData;
-        const redirectUrl = security.frontUrl + "/login/fail";
+        const redirectUrl = security.frontUrl + "/login/fail#" + security.nodeEnv;
         const ssoLogoutUrl = client.getLogoutUrl(sid, redirectUrl);
-        loginFail(req, res, ssoLogoutUrl);
+        loginFail(req, res, ssoLogoutUrl + "#err3");
       }
     });
   }
@@ -132,7 +132,7 @@ const createNewTokenHandler = (req, res, userData) => {
     async (err, result) => {
       if (err) {
         logger.error(err);
-        loginFail(req, res);
+        loginFail(req, res, security.frontUrl + "/login/fail#err4");
       } else if (!result) joinus(req, res, userData);
       else if (result.name !== userData.name) update(req, res, userData);
       else {
