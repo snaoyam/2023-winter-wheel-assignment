@@ -48,6 +48,7 @@
     "test": "npm run sample && npm run mocha",
     "mocha": "cross-env TZ='Asia/Seoul' NODE_ENV=test mocha --recursive --reporter spec --exit",
     "serve": "cross-env TZ='Asia/Seoul' NODE_ENV=production node app.js",
+    "serve-dev": "cross-env TZ='Asia/Seoul' NODE_ENV=development node app.js",
     "lint": "npx eslint --fix .",
     "sample": "cd sampleGenerator && npm start && cd .."
   },
